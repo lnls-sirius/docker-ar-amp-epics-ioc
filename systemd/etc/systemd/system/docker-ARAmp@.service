@@ -1,0 +1,19 @@
+[Unit]
+Description=AR Amplifier container instance %I
+Requires=docker.service
+After=docker.service
+
+[Service]
+Restart=always
+RestartSec=2
+EnvironmentFile=/etc/sysconfig/docker-ar-amp-epics-ioc
+EnvironmentFile=/etc/sysconfig/docker-ar-amp-epics-ioc-mapping
+Environment=IMAGE_VERSION=0.1.0-base-3.15-debian-9
+# Used inside runARAmp script
+Environment=ARAMP_INSTANCE=%i
+ExecStartPre=-/usr/bin/docker pull lnlsdig/ar-amp-epics-ioc:${IMAGE_VERSION}
+ExecStart=/usr/local/bin/runARAmp.sh
+ExecStop=/usr/local/bin/stopARAmp.sh
+
+[Install]
+WantedBy=multi-user.target
