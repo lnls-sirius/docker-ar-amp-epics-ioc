@@ -2,7 +2,7 @@ FROM lnls/epics-dist:base-3.15-debian-9
 
 ENV IOC_REPO ar-amp-epics-ioc
 ENV BOOT_DIR iocARAmp
-ENV COMMIT v0.1.0
+ENV COMMIT v0.2.0
 
 RUN git clone https://github.com/lnls-dig/${IOC_REPO}.git /opt/epics/${IOC_REPO} && \
     cd /opt/epics/${IOC_REPO} && \
